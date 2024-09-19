@@ -502,6 +502,7 @@ extern tdef tdefs[];
 #define DT_KEY		4
 #define DT_MONEY	5
 #define DT_CHR		6
+#define DT_INTDATE  7
 
 int dbg_print(int dt, FILE *tgt, void *data, int len, int eol);
 #define PR_STR(f, str, len)		dbg_print(DT_STR, f, (void *)str, len, 1)
@@ -514,6 +515,11 @@ int dbg_print(int dt, FILE *tgt, void *data, int len, int eol);
 #define PR_CHR(f, str)	 		dbg_print(DT_CHR, f, (void *)str, 0, 1)
 #define  PR_STRT(fp)   /* any line prep for a record goes here */
 #define  PR_END(fp)    fprintf(fp, "\n")   /* finish the record here */
+#define PR_INTDATE(f, str) ({\
+    dbg_print(DT_STR, f, (void *)str, 4, 0);\
+    dbg_print(DT_STR, f, (void *)str[5], 2, 0);\
+    dbg_print(DT_STR, f, (void *)str[8], 2, 1);\
+})
 
 #ifdef SSBM
 #define  PR_DATE(tgt, yr, mn, dy)	\

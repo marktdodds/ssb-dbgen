@@ -83,6 +83,9 @@ dbg_print(int format, FILE *target, void *data, int len, int sep)
 
 	switch(format)
 	{
+	case DT_INTDATE:
+		fprintf(target, "%s", (char *)data);
+		break;
 	case DT_STR:
 		if (columnar)
 			fprintf(target, "%-*s", len, (char *)data);
@@ -266,7 +269,7 @@ pr_line(order_t *o, int mode)
 	PR_INT(fp_l, o->lineorders[i].custkey);
 	PR_INT(fp_l, o->lineorders[i].partkey);
         PR_INT(fp_l, o->lineorders[i].suppkey);
-        PR_STR(fp_l, o->lineorders[i].orderdate, DATE_LEN);
+        PR_INTDATE(fp_l, o->lineorders[i].orderdate);
 	PR_STR(fp_l, o->lineorders[i].opriority, O_OPRIO_LEN);
 	PR_INT(fp_l, o->lineorders[i].ship_priority);
         PR_INT(fp_l, o->lineorders[i].quantity);
@@ -276,7 +279,7 @@ pr_line(order_t *o, int mode)
         PR_INT(fp_l, o->lineorders[i].revenue);
 	PR_INT(fp_l, o->lineorders[i].supp_cost);
 	PR_INT(fp_l, o->lineorders[i].tax);
-	PR_STR(fp_l, o->lineorders[i].commit_date, DATE_LEN);
+	PR_INTDATE(fp_l, o->lineorders[i].commit_date);
 	PR_STR(fp_l, o->lineorders[i].shipmode, O_SHIP_MODE_LEN);
         PR_END(fp_l);
         }
