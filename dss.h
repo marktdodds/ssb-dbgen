@@ -518,9 +518,9 @@ int dbg_print(int dt, FILE *tgt, void *data, int len, int eol);
 #define PR_INTDATE(f, str) ({\
 	str[4] = '\0';\
 	str[7] = '\0';\
-    dbg_print(DT_STR, f, (void *)str, 4, 0);\
-    dbg_print(DT_STR, f, (void *)&str[5], 2, 0);\
-    dbg_print(DT_STR, f, (void *)&str[8], 2, 1);\
+    dbg_print(DT_INTDATE, f, (void *)str, 4, -1);\
+    dbg_print(DT_INTDATE, f, (void *)&str[5], 2, -1);\
+    dbg_print(DT_INTDATE, f, (void *)&str[8], 2, 1);\
 })
 
 #ifdef SSBM
