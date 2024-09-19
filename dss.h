@@ -516,9 +516,11 @@ int dbg_print(int dt, FILE *tgt, void *data, int len, int eol);
 #define  PR_STRT(fp)   /* any line prep for a record goes here */
 #define  PR_END(fp)    fprintf(fp, "\n")   /* finish the record here */
 #define PR_INTDATE(f, str) ({\
+	str[4] = '\0';\
+	str[7] = '\0';\
     dbg_print(DT_STR, f, (void *)str, 4, 0);\
-    dbg_print(DT_STR, f, (void *)str[5], 2, 0);\
-    dbg_print(DT_STR, f, (void *)str[8], 2, 1);\
+    dbg_print(DT_STR, f, (void *)&str[5], 2, 0);\
+    dbg_print(DT_STR, f, (void *)&str[8], 2, 1);\
 })
 
 #ifdef SSBM
